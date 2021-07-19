@@ -30,6 +30,7 @@ export const notion = new Client({
 
 export const getDb = async (db):Promise<DatabasesQueryResponse> => await notion.databases.query({database_id:db});
 
+
 async function getAllDBsUnderParent(parentDb:string):Promise<string[]> {
     const parent = await getDb(parentDb);
     const allDbIds = [parentDb];
