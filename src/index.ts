@@ -1,3 +1,9 @@
-import {notion} from './auth'
+import {getParentDb, notion} from './auth';
 
-notion
+async function main() {
+    const parentDb = await getParentDb();
+}
+
+
+
+main();

@@ -17,6 +17,15 @@
   },
   "dependencies": {
     "@notionhq/client": "^0.2.2",
+    "dotenv-quokka-plugin": "^1.0.0",
     "lodash": "^4.17.21"
+  },
+  "quokka": {
+    "plugins": [
+      "dotenv-quokka-plugin"
+    ],
+    "dotenv": {
+      "path": "./notion.env"
+    }
   }
 }
