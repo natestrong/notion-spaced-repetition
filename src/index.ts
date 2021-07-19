@@ -1,9 +1,8 @@
-import {getParentDb, notion} from './auth';
+import {notion} from './notion';
+import {generateHome} from './generateHome';
 
 async function main() {
-    const parentDb = await getParentDb();
+    await generateHome();
 }
-
-
 
 main();
