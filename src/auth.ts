@@ -2,7 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import {Client, LogLevel} from '@notionhq/client/build/src';
 import {Database} from '@notionhq/client/build/src/api-types';
-import {DatabasesQueryResponse} from '@notionhq/client/build/src/api-endpoints';
+import {
+    DatabasesQueryResponse,
+    DatabasesRetrieveResponse,
+    SearchResponse
+} from '@notionhq/client/build/src/api-endpoints';
 
 const ENV = {
     PARENT_DB:process.env.NOTION_DATABASE_ID,
@@ -28,7 +32,15 @@ export const notion = new Client({
     // logLevel:LogLevel.DEBUG,
 });
 
-export const getDb = async (db):Promise<DatabasesQueryResponse> => await notion.databases.query({database_id:db});
+export const getDbQuery = async (db):Promise<DatabasesQueryResponse> => await notion.databases.query({database_id:db});
+export const getDbRetrieve = async (db):Promise<DatabasesRetrieveResponse> => await notion.databases.retrieve({database_id:db});
+export const notionSearch = async ():Promise<SearchResponse> => await notion
+    .search({
+        sort:{
+            direction:'ascending',
+            timestamp:'last_edited_time',
+        }
+    });
 
 
 async function getAllDBsUnderParent(parentDb:string):Promise<string[]> {
@@ -49,4 +61,8 @@ async function getAllDBsUnderParent(parentDb:string):Promise<string[]> {
     return allDbIds;
 }
 
-getAllDBsUnderParent(ENV.PARENT_DB);
+// getAllDBsUnderParent(ENV.PARENT_DB);
+
+getDbQuery('7e80fc63a4da42e78e44f1e271b063bb');
+
+notionSearch()
